@@ -1,0 +1,17 @@
+torch
+transformers>=4.45
+accelerate
+bitsandbytes
+sentencepiece
+huggingface_hub
+google-genai
+python-dotenv
+pandas
+numpy
+scipy
+statsmodels
+matplotlib
+seaborn
+pyyaml
+tabulate
+jupyter

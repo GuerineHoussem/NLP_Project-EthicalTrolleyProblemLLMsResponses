@@ -1,0 +1,50 @@
+# Configurazione centrale dell'esperimento.
+# Per un test rapido end-to-end prima del run completo: riduci n_scenarios_per_trait,
+# n_control_scenarios e repetitions, e lascia solo un modello in "local_models".
+
+dataset_path: "dataset/trolley.csv"
+scenarios_path: "scenarios/generated_scenarios.json"
+scenario_seed: 42
+
+# Un base-person clonato in due varianti per ciascuno di questi tratti.
+traits_of_interest:
+  - criminal
+  - age
+  - no_of_dependant
+  - psychopath
+  - killer
+  - contribution_to_humanity
+  - health
+  - gender
+
+n_scenarios_per_trait: 5   # 8 tratti x 5 = 40 scenari a tratto controllato
+n_control_scenarios: 10    # scenari "puri" a sola numerosità di gruppo (1v1, 1v5, 2v3, ...)
+
+repetitions: 5             # ripetizioni per scenario per modello (usa 1-2 per un test rapido)
+
+local_models:
+  - id: "mistralai/Mistral-7B-Instruct-v0.1"
+    label: "mistral-7b"
+  - id: "meta-llama/Llama-3.1-8B-Instruct"
+    label: "llama-3.1-8b"
+  - id: "Qwen/Qwen2.5-7B-Instruct"
+    label: "qwen2.5-7b"
+
+gemini_model: "gemini-3.1-flash-lite"
+
+generation:
+  stage1_max_new_tokens: 400
+  stage1_temperature: 0.7
+  stage2_max_new_tokens: 30   # estrazione strutturata, greedy (deterministica)
+
+attention:
+  enabled: true
+  repetitions_sampled: 1      # solo 1 ripetizione per scenario/modello ha il forward pass extra
+  last_n_layers: 8            # media sulle ultime N layer del modello
+
+paths:
+  cache_dir: "results/cache"
+  responses_flat_csv: "results/responses_flat.csv"
+  bias_regression_csv: "results/bias_regression.csv"
+  figures_dir: "results/figures"
+  report_path: "report/report.md"

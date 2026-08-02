@@ -1,0 +1,15 @@
+# Segreti
+.env
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+venv/
+.venv/
+
+# Cache grezza degli esperimenti (rigenerabile, potenzialmente grande)
+results/cache/
+
+# Report PDF generato localmente (il .md è la sorgente versionata)
+report/*.pdf
